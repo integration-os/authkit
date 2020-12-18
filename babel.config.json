@@ -1,0 +1,9 @@
+{
+  "presets": ["@babel/preset-react", "@babel/preset-env"],
+  "plugins": [
+    "babel-plugin-typescript-to-proptypes",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-export-default-from",
+    "add-module-exports"
+  ]
+}
