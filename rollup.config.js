@@ -1,7 +1,7 @@
 import babel from '@rollup/plugin-babel';
 import resolve from '@rollup/plugin-node-resolve';
-import ts from '@wessberg/rollup-plugin-ts';
 import commonjs from 'rollup-plugin-commonjs';
+import typescript from 'rollup-plugin-typescript2';
 import pkg from './package.json';
 
 export default {
@@ -12,7 +12,10 @@ export default {
     { file: pkg.module, format: 'es' },
   ],
   plugins: [
-    ts(),
+    typescript({
+      rollupCommonJSResolveHack: false,
+      clean: true,
+    }),
     resolve(),
     babel({
       babelHelpers: 'bundled',
