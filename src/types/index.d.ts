@@ -1,7 +1,9 @@
-
 export interface MergeLink {
   initialize: (config: InitializeProps) => void;
-  update: (config: { linkToken: string; onSuccess: (publicTokenID: string) => void }) => void;
+  update: (config: {
+    linkToken: string;
+    onSuccess: (publicTokenID: string) => void;
+  }) => void;
   openLink: () => void;
 }
 export interface UseMergeLinkProps {
