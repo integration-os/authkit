@@ -1,28 +1,23 @@
-export interface MergeLink {
-  initialize: (config: {
-    linkToken: string;
-    onSuccess: (linkTokenID: string) => void;
-    onIFrameReady: () => void;
-  }) => void;
-  unmount: () => void;
-  openLink: () => void;
-}
 
 export interface MergeLink {
-  initialize: (config: {
-    linkToken: string;
-    onSuccess: (publicTokenID: string) => void;
-    onIFrameReady: () => void;
-  }) => void;
-  unmount: () => void;
+  initialize: (config: InitializeProps) => void;
+  update: (config: { linkToken: string; onSuccess: (publicTokenID: string) => void }) => void;
   openLink: () => void;
 }
-
-export interface MergeWindow extends Window {
-  MergeLink: MergeLink;
-}
-
-export type UseMergeLinkProps = {
+export interface UseMergeLinkProps {
   linkToken: string;
+  demoCategories: Array<string>;
+  onExit: () => void;
+  onLoad: () => void;
   onSuccess: (publicTokenID: string) => void;
-};
+}
+
+export interface InitializeProps extends UseMergeLinkProps {
+  onReady: () => void;
+}
+
+declare global {
+  interface Window {
+    MergeLink: MergeLink;
+  }
+}
