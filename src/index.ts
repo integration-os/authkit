@@ -1,2 +1,1 @@
-export {useMergeLink} from "./useMergeLink";
-
+export { useMergeLink } from './useMergeLink';
