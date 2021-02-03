@@ -18,6 +18,12 @@ export interface InitializeProps extends UseMergeLinkProps {
   onReady: () => void;
 }
 
+export type UseMergeLinkResponse = {
+  open: () => void;
+  isReady: boolean;
+  error: ErrorEvent | null;
+}
+
 declare global {
   interface Window {
     MergeLink: MergeLink;

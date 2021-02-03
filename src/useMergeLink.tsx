@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import useScript from 'react-script-hook';
-import { UseMergeLinkProps } from './types';
+import useScript from './useScriptHook';
+import { UseMergeLinkProps, UseMergeLinkResponse } from './types';
 
-const useMergeLink = (config: UseMergeLinkProps): { open; isReady; error } => {
+export const useMergeLink = (config: UseMergeLinkProps): UseMergeLinkResponse => {
   const [loading, error] = useScript({
     src: 'https://cdn.merge.dev/initialize.js',
     checkForExisting: true,
@@ -24,5 +24,3 @@ const useMergeLink = (config: UseMergeLinkProps): { open; isReady; error } => {
 
   return { open, isReady, error };
 };
-
-export default useMergeLink;
