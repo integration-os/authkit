@@ -1,6 +1,6 @@
 {
   "name": "@mergeapi/react-merge-link",
-  "version": "1.0.1",
+  "version": "1.1.6",
   "description": "A React hook wrapper for Merge Link.",
   "files": [
     "dist",
@@ -9,9 +9,6 @@
   "main": "dist/index.umd.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
-  "dependencies": {
-    "react-script-hook": "^1.2.1"
-  },
   "devDependencies": {
     "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
