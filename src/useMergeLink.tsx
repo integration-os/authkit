@@ -9,17 +9,21 @@ export const useMergeLink = (config: UseMergeLinkProps): UseMergeLinkResponse =>
   });
   const [isReady, setIsReady] = useState(false);
 
+  const isReadyForInitialization = !!window.MergeLink && !loading && !error;
+
   useEffect(() => {
-    if (!loading && !error) {
+    if (isReadyForInitialization && window.MergeLink) {
       window.MergeLink.initialize({
         ...config,
         onReady: () => setIsReady(true),
       });
     }
-  }, [loading, error, config]);
+  }, [isReadyForInitialization, config]);
 
   const open = () => {
-    window.MergeLink.openLink();
+    if (window.MergeLink) {
+      window.MergeLink.openLink();
+    }
   };
 
   return { open, isReady, error };
