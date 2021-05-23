@@ -26,6 +26,6 @@ export type UseMergeLinkResponse = {
 
 declare global {
   interface Window {
-    MergeLink: undefined | MergeLink;
+    MergeLink: MergeLink;
   }
 }
