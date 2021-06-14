@@ -4,7 +4,7 @@ export interface MergeLink {
     linkToken: string;
     onSuccess: (publicTokenID: string) => void;
   }) => void;
-  openLink: () => void;
+  openLink: (config: UseMergeLinkProps) => void;
 }
 export interface UseMergeLinkProps {
   linkToken: string;
@@ -19,7 +19,7 @@ export interface InitializeProps extends UseMergeLinkProps {
 }
 
 export type UseMergeLinkResponse = {
-  open: () => void;
+  open: (config: UseMergeLinkProps) => void;
   isReady: boolean;
   error: ErrorEvent | null;
 }
