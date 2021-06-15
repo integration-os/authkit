@@ -22,7 +22,7 @@ export const useMergeLink = (config: UseMergeLinkProps): UseMergeLinkResponse =>
 
   const open = () => {
     if (window.MergeLink) {
-      window.MergeLink.openLink();
+      window.MergeLink.openLink(config);
     }
   };
 
