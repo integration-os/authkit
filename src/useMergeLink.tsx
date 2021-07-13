@@ -8,7 +8,7 @@ export const useMergeLink = (config: UseMergeLinkProps): UseMergeLinkResponse =>
     checkForExisting: true,
   });
   const [isReady, setIsReady] = useState(false);
-  const isServer = (typeof window === 'undefined')
+  const isServer = (typeof window === 'undefined');
   const isReadyForInitialization = !isServer && !!window.MergeLink && !loading && !error;
 
   useEffect(() => {
