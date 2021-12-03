@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import useScript from './useScriptHook';
 import { UseMergeLinkProps, UseMergeLinkResponse } from './types';
 
@@ -20,11 +20,11 @@ export const useMergeLink = (config: UseMergeLinkProps): UseMergeLinkResponse =>
     }
   }, [isReadyForInitialization, config]);
 
-  const open = () => {
+  const open = useCallback(() => {
     if (window.MergeLink) {
       window.MergeLink.openLink(config);
     }
-  };
+  }, [config]);
 
   return { open, isReady, error };
 };
