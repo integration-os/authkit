@@ -6,9 +6,14 @@ export interface MergeLink {
   }) => void;
   openLink: (config: UseMergeLinkProps) => void;
 }
+
+export interface TenantConfig {
+  apiBaseUrlOverride?: string
+}
 export interface UseMergeLinkProps {
   linkToken: string;
   demoCategories: Array<string>;
+  tenantConfig?: TenantConfig
   onExit: () => void;
   onLoad: () => void;
   onSuccess: (publicTokenID: string) => void;
