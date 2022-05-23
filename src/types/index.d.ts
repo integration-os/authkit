@@ -8,7 +8,7 @@ export interface MergeLink {
 }
 
 export interface TenantConfig {
-  apiBaseUrlOverride?: string
+  apiBaseURL?: string
 }
 export interface UseMergeLinkProps {
   linkToken: string;
