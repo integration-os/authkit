@@ -2,6 +2,7 @@ import babel from '@rollup/plugin-babel';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import typescript from 'rollup-plugin-typescript2';
+import copy from 'rollup-plugin-copy';
 import pkg from './package.json';
 
 export default {
@@ -15,6 +16,9 @@ export default {
     typescript({
       rollupCommonJSResolveHack: false,
       clean: true,
+    }),
+    copy({
+      targets: [{ src: 'src/types', dest: 'dist' }],
     }),
     resolve(),
     babel({
