@@ -13,7 +13,7 @@ export interface TenantConfig {
 export interface UseMergeLinkProps {
   linkToken: string;
   tenantConfig?: TenantConfig
-  onExit: () => void;
+  onExit?: () => void;
   onSuccess: (publicTokenID: string) => void;
 }
 
