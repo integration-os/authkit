@@ -27,7 +27,7 @@ export interface InitializeProps extends UseMergeLinkProps {
 }
 
 export type UseMergeLinkResponse = {
-  open: (config: UseMergeLinkProps) => void;
+  open: () => void;
   isReady: boolean;
   error: ErrorEvent | null;
 };
