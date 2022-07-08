@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import useScript from './useScriptHook';
+import useScript from 'react-script-hook';
 import { UseMergeLinkProps, UseMergeLinkResponse } from './types';
 
 export const useMergeLink = ({
