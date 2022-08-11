@@ -1,8 +1,15 @@
+export type AdditionalSuccessfulLinkInfo = {
+  isTokenForOtherPreexistingLinkedAccount?: boolean;
+};
+
 export interface MergeLink {
   initialize: (config: InitializeProps) => void;
   update: (config: {
     linkToken: string;
-    onSuccess: (publicTokenID: string) => void;
+    onSuccess: (
+      publicToken: string,
+      additionalInfo?: AdditionalSuccessfulLinkInfo
+    ) => void;
   }) => void;
   openLink: (config: UseMergeLinkProps) => void;
 }
@@ -13,7 +20,10 @@ export interface TenantConfig {
 export interface UseMergeLinkProps {
   linkToken: string;
   tenantConfig?: TenantConfig;
-  onSuccess: (publicTokenID: string) => void;
+  onSuccess: (
+    publicToken: string,
+    additionalInfo?: AdditionalSuccessfulLinkInfo
+  ) => void;
   onExit?: () => void;
   /**
    * Make Link call `onSuccess` immediately after an account has been successfully linked instead of after the user closes the Link modal.
