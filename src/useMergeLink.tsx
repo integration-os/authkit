@@ -1,6 +1,14 @@
 import { useCallback, useEffect, useState } from 'react';
 import useScript from 'react-script-hook';
-import { UseMergeLinkProps, UseMergeLinkResponse } from './types';
+import {
+  InitializeProps,
+  UseMergeLinkProps,
+  UseMergeLinkResponse,
+} from './types';
+
+const isLinkTokenDefined = (
+  config: UseMergeLinkProps
+): config is InitializeProps => config?.linkToken !== undefined;
 
 export const useMergeLink = ({
   shouldSendTokenOnSuccessfulLink = true,
@@ -13,7 +21,11 @@ export const useMergeLink = ({
   const [isReady, setIsReady] = useState(false);
   const isServer = typeof window === 'undefined';
   const isReadyForInitialization =
-    !isServer && !!window.MergeLink && !loading && !error;
+    !isServer &&
+    !!window.MergeLink &&
+    !loading &&
+    !error &&
+    isLinkTokenDefined(config);
 
   useEffect(() => {
     if (isReadyForInitialization && window.MergeLink) {
