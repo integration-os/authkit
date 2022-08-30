@@ -18,7 +18,7 @@ export interface TenantConfig {
   apiBaseURL?: string;
 }
 export interface UseMergeLinkProps {
-  linkToken: string;
+  linkToken?: string | undefined;
   tenantConfig?: TenantConfig;
   onSuccess: (
     publicToken: string,
@@ -33,7 +33,8 @@ export interface UseMergeLinkProps {
 }
 
 export interface InitializeProps extends UseMergeLinkProps {
-  onReady: () => void;
+  linkToken: string;
+  onReady?: () => void;
 }
 
 export type UseMergeLinkResponse = {
