@@ -2,10 +2,19 @@ export type AdditionalSuccessfulLinkInfo = {
   isTokenForOtherPreexistingLinkedAccount?: boolean;
 };
 
+export type ValidationErrors = ValidationError[];
+
+export type ValidationError = {
+  detail: string;
+  problem_type?: string;
+  [key: string]: any;
+};
+
 export interface MergeLink {
   initialize: (config: InitializeProps) => void;
   update: (config: {
     linkToken: string;
+    onValidationError?: (errors: ValidationErrors) => void;
     onSuccess: (
       publicToken: string,
       additionalInfo?: AdditionalSuccessfulLinkInfo
@@ -20,6 +29,7 @@ export interface TenantConfig {
 export interface UseMergeLinkProps {
   linkToken?: string | undefined;
   tenantConfig?: TenantConfig;
+  onValidationError?: (errors: ValidationErrors) => void;
   onSuccess: (
     publicToken: string,
     additionalInfo?: AdditionalSuccessfulLinkInfo

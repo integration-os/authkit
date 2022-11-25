@@ -1,6 +1,6 @@
 {
   "name": "@mergeapi/react-merge-link",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "A React hook wrapper for Merge Link.",
   "files": [
     "dist",
