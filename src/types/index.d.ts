@@ -7,7 +7,6 @@ export type ValidationErrors = ValidationError[];
 export type ValidationError = {
   detail: string;
   problem_type?: string;
-  error_response?: string;
   [key: string]: any;
 };
 
@@ -18,7 +17,7 @@ export interface MergeLink {
     onValidationError?: (errors: ValidationErrors) => void;
     onSuccess: (
       publicToken: string,
-      additionalInfo?: AdditionalSuccessfulLinkInfo,
+      additionalInfo?: AdditionalSuccessfulLinkInfo
     ) => void;
   }) => void;
   openLink: (config: UseMergeLinkProps) => void;
@@ -33,7 +32,7 @@ export interface UseMergeLinkProps {
   onValidationError?: (errors: ValidationErrors) => void;
   onSuccess: (
     publicToken: string,
-    additionalInfo?: AdditionalSuccessfulLinkInfo,
+    additionalInfo?: AdditionalSuccessfulLinkInfo
   ) => void;
   onExit?: () => void;
   /**
