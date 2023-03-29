@@ -5,6 +5,8 @@ import typescript from 'rollup-plugin-typescript2';
 import copy from 'rollup-plugin-copy';
 import pkg from './package.json';
 import { terser } from 'rollup-plugin-terser';
+import json from '@rollup/plugin-json';
+
 
 export default {
   input: 'src/index.ts',
@@ -18,15 +20,22 @@ export default {
       rollupCommonJSResolveHack: false,
       clean: true,
     }),
+    json(),
     copy({
       targets: [{ src: 'src/types', dest: 'dist' }],
     }),
     resolve(),
     babel({
+      exclude: 'node_modules/**',
       babelHelpers: 'bundled',
       extensions: ['.ts', '.js', '.tsx', '.jsx'],
     }),
-    commonjs(),
+    commonjs({
+      namedExports: {
+        'react/jsx-runtime': ['jsx', 'jsxs'],
+        "react-dom": ["createPortal"],
+      }
+    }),
     terser(),
   ],
 };
