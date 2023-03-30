@@ -6,6 +6,7 @@ import copy from 'rollup-plugin-copy';
 import pkg from './package.json';
 import { terser } from 'rollup-plugin-terser';
 import json from '@rollup/plugin-json';
+// import nodePolyfills from 'rollup-plugin-polyfill-node';
 
 
 export default {
@@ -24,7 +25,12 @@ export default {
     copy({
       targets: [{ src: 'src/types', dest: 'dist' }],
     }),
-    resolve(),
+    resolve({
+      browser: true,
+      preferBuiltins: false,
+      extensions: ['.mjs', '.js', '.json', '.node', '.jsx', '.ts', '.tsx'],
+    }),
+    // nodePolyfills(),
     babel({
       exclude: 'node_modules/**',
       babelHelpers: 'bundled',
