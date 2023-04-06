@@ -15,7 +15,7 @@
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "noFallthroughCasesInSwitch": true,
-
+    "importHelpers": true,
     "isolatedModules": true
   },
   "include": ["./src"]

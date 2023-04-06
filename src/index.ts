@@ -1,1 +1,2 @@
-export { useEventLink } from './useEventLink';
+export { useSourceEventLink } from './useSourceEventLink';
+export { useDestinationEventLink } from './useDestinationEventLink';

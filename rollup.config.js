@@ -38,7 +38,7 @@ export default {
     }),
     commonjs({
       namedExports: {
-        'react/jsx-runtime': ['jsx', 'jsxs'],
+        'react/jsx-runtime': ['jsx', 'jsxs', 'Fragment'],
         "react-dom": ["createPortal"],
       }
     }),
