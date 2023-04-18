@@ -54,7 +54,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/krish221997/test-event-link.git"
+    "url": "git+https://github.com/buildable/event-link.git"
   },
   "keywords": [
     "event"
@@ -62,7 +62,7 @@
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/krish221997/test-event-link/issues"
+    "url": "https://github.com/buildable/event-link/issues"
   },
-  "homepage": "https://github.com/krish221997/test-event-link#readme"
+  "homepage": "https://github.com/buildable/event-link#readme"
 }
