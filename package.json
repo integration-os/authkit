@@ -1,7 +1,7 @@
 {
   "name": "test-event-link",
-  "version": "1.0.6",
-  "description": "A React hook wrapper for Merge Link.",
+  "version": "1.0.7",
+  "description": "A React hook wrapper for Event Link.",
   "files": [
     "dist",
     "src"
