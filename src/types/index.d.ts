@@ -5,15 +5,13 @@ export interface SourceEventLink {
     linkTokenEndpoint,
     linkHeaders,
   }: SourceEventLinkProps) => void;
-  initialize: (
-    {
-      baseUrl,
-      environment,
-    }: {
-      baseUrl?: string;
-      environment?: "sandbox" | "production";
-    }
-  ) => void;
+  initialize: ({
+    baseUrl,
+    environment,
+  }: {
+    baseUrl?: string;
+    environment?: "sandbox" | "production";
+  }) => void;
 }
 
 export interface DestinationEventLink {
@@ -25,7 +23,6 @@ export interface DestinationEventLink {
   }: DestinationEventLinkProps) => void;
   initialize: () => void;
 }
-
 
 export type SourceIntegrationTypes =
   | "stripe"
@@ -61,6 +58,10 @@ export interface SourceEventLinkProps {
   linkHeaders?: Record<string, unknown>;
   environment?: "sandbox" | "production";
   baseUrl?: string;
+  title?: string;
+  onSuccess?: (source?: LinkIntegrationResponse) => void;
+  onError?: (error: string) => void;
+  onClose?: () => void;
 }
 
 export interface DestinationEventLinkProps {
@@ -70,4 +71,38 @@ export interface DestinationEventLinkProps {
   linkHeaders?: Record<string, unknown>;
   environment?: "sandbox" | "production";
   baseUrl?: string;
+  title?: string;
+  onSuccess?: (destination?: LinkIntegrationResponse) => void;
+  onError?: (error: string) => void;
+  onClose?: () => void;
+}
+
+export interface WindowProps {
+  group: string;
+  linkTokenEndpoint: string;
+  connectionType: "source" | "target";
+  linkHeaders?: Record<string, unknown>;
+  baseUrl?: string;
+  environment?: "sandbox" | "production";
+  title?: string;
+  onClose?: () => void;
+  integrationTypes?: string[];
+}
+
+export interface LinkIntegrationResponse {
+  _id: string;
+  label: string;
+  group: string;
+  type: string;
+  connectionType: string;
+  createdAt: number;
+  updatedAt?: number;
+  expiresAt?: number;
+  createdDate: string;
+  token: string;
+  integration: {
+    id: string;
+    image: string;
+    key: string;
+  };
 }

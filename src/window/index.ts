@@ -1,3 +1,5 @@
+import { WindowProps } from "../types";
+
 export class LinkWindow {
   private group: string;
   private integrationTypes?: string[];
@@ -6,23 +8,19 @@ export class LinkWindow {
   private baseUrl?: string;
   private environment?: string;
   private connectionType: string;
+  private onClose?: () => void;
+  private title?: string;
 
-  constructor(
-    group: string,
-    linkTokenEndpoint: string,
-    connectionType: string,
-    integrationTypes?: string[],
-    linkHeaders?: object,
-    baseUrl?: string,
-    environment?: string
-  ) {
-    this.group = group;
-    this.integrationTypes = integrationTypes;
-    this.linkTokenEndpoint = linkTokenEndpoint;
-    this.linkHeaders = linkHeaders;
-    this.baseUrl = baseUrl;
-    this.environment = environment;
-    this.connectionType = connectionType;
+  constructor(props: WindowProps) {
+    this.group = props.group;
+    this.integrationTypes = props.integrationTypes;
+    this.linkTokenEndpoint = props.linkTokenEndpoint;
+    this.linkHeaders = props.linkHeaders;
+    this.baseUrl = props.baseUrl;
+    this.environment = props.environment;
+    this.connectionType = props.connectionType;
+    this.onClose = props.onClose;
+    this.title = props.title;
   }
 
   private _getBaseUrl() {
@@ -63,6 +61,7 @@ export class LinkWindow {
         linkTokenEndpoint: this.linkTokenEndpoint,
         linkHeaders: this.linkHeaders,
         connectionType: this.connectionType,
+        title: this.title,
       },
       this._getBaseUrl()
     );
@@ -73,33 +72,10 @@ export class LinkWindow {
       `${this.connectionType}-event-link-iframe`
     ) as HTMLIFrameElement;
     iFrameWindow.style.display = "none";
+    this.onClose?.();
   }
 }
 
-export const createWindow = ({
-  group,
-  integrationTypes,
-  linkTokenEndpoint,
-  connectionType,
-  linkHeaders,
-  baseUrl,
-  environment,
-}: {
-  group: string;
-  integrationTypes?: string[];
-  linkTokenEndpoint: string;
-  connectionType: string;
-  linkHeaders?: object;
-  baseUrl?: string;
-  environment?: string;
-}) => {
-  return new LinkWindow(
-    group,
-    linkTokenEndpoint,
-    connectionType,
-    integrationTypes,
-    linkHeaders,
-    baseUrl,
-    environment
-  );
+export const createWindow = (props: WindowProps) => {
+  return new LinkWindow(props);
 };

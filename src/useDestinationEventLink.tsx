@@ -2,23 +2,8 @@ import { useEffect } from "react";
 import { DestinationEventLinkProps } from "./types";
 import { createWindow } from "./window";
 
-export const useDestinationEventLink = ({
-  integrationTypes,
-  group,
-  linkTokenEndpoint,
-  linkHeaders,
-  baseUrl,
-  environment,
-}: DestinationEventLinkProps) => {
-  const linkWindow = createWindow({
-    baseUrl,
-    environment,
-    integrationTypes,
-    group,
-    linkTokenEndpoint,
-    linkHeaders,
-    connectionType: "target",
-  });
+export const useDestinationEventLink = (props: DestinationEventLinkProps) => {
+  const linkWindow = createWindow({ ...props, connectionType: "target" });
 
   useEffect(() => {
     if (linkWindow) {
@@ -27,8 +12,21 @@ export const useDestinationEventLink = ({
   }, [linkWindow]);
 
   window.addEventListener("message", (event) => {
-    if (event.data === "EXIT_EVENT_LINK") {
-      linkWindow.closeLink();
+    const iFrameWindow = document.getElementById(
+      `target-event-link-iframe`
+    ) as HTMLIFrameElement;
+    if (iFrameWindow?.style?.display === "block") {
+      switch (event.data?.messageType) {
+        case "EXIT_EVENT_LINK":
+          linkWindow.closeLink();
+          break;
+        case "LINK_SUCCESS":
+          props.onSuccess?.(event.data?.message);
+          break;
+        case "LINK_ERROR":
+          props.onError?.(event.data?.message);
+          break;
+      }
     }
   });
 
@@ -36,5 +34,9 @@ export const useDestinationEventLink = ({
     linkWindow.openLink();
   };
 
-  return { open };
+  const close = () => {
+    linkWindow.closeLink();
+  };
+
+  return { open, close };
 };
