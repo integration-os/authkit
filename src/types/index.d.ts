@@ -49,6 +49,7 @@ export type DestinationIntegrationTypes =
   | "firestore"
   | "mongodb"
   | "postgresql"
+  | "shopify"
   | "webhook";
 
 export interface SourceEventLinkProps {
