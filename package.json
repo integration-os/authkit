@@ -1,6 +1,6 @@
 {
   "name": "@event-inc/link",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A React hook wrapper for Event Link.",
   "files": [
     "dist",
