@@ -28,9 +28,9 @@ export class LinkWindow {
       return this.baseUrl;
     }
     if (this.environment === "production") {
-      return "https://app.event-link.dev";
+      return "https://link.event.dev";
     }
-    return "https://sandbox.event-link.dev";
+    return "https://sandbox-link.event.dev";
   }
 
   public initialize() {
