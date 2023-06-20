@@ -33,16 +33,29 @@ export const useOauthDestination = <T extends OauthDestinations>(
     window.open(url, "_blank");
   };
   const create = async (props: CreateOauthDestinationProps) => {
-    const { code, group, label, serverEndpoint, type: destinationType } = props;
+    const {
+      code,
+      group,
+      label,
+      oauthEndpoint,
+      oauthHeaders,
+      type: destinationType,
+    } = props;
     const type = oauthDestination.type || destinationType;
 
     try {
-      const response = await axios.post(serverEndpoint, {
-        code,
-        group,
-        label,
-        type,
-      });
+      const response = await axios.post(
+        oauthEndpoint,
+        {
+          code,
+          group,
+          label,
+          type,
+        },
+        {
+          headers: oauthHeaders,
+        }
+      );
 
       return response.data;
     } catch (error) {
