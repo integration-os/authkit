@@ -145,7 +145,7 @@ export interface CreateOauthDestinationProps {
   code: string;
   group?: string;
   label?: string;
-  oauthEndpoint: string;
-  oauthHeaders?: Record<string, any>;
+  endpoint: string;
+  headers?: Record<string, any>;
   type?: OauthDestinations;
 }

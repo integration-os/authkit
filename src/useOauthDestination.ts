@@ -37,15 +37,15 @@ export const useOauthDestination = <T extends OauthDestinations>(
       code,
       group,
       label,
-      oauthEndpoint,
-      oauthHeaders,
+      endpoint,
+      headers,
       type: destinationType,
     } = props;
     const type = oauthDestination.type || destinationType;
 
     try {
       const response = await axios.post(
-        oauthEndpoint,
+        endpoint,
         {
           code,
           group,
@@ -53,15 +53,16 @@ export const useOauthDestination = <T extends OauthDestinations>(
           type,
         },
         {
-          headers: oauthHeaders,
+          headers: headers,
         }
       );
 
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        return error.response?.data;
+        throw new Error(error.response?.data.error);
       }
+      throw new Error("An unknown error occurred");
     }
   };
 
