@@ -126,7 +126,7 @@ type XeroScopes =
 
 type SageScopes = "full_access" | "full_access_with_payroll";
 
-export type OauthDestinations = "xero" | "sage";
+export type OauthDestinations = "xero";
 export type OauthScopes<T> = T extends "xero"
   ? XeroScopes
   : T extends "sage"
