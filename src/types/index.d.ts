@@ -107,3 +107,45 @@ export interface LinkIntegrationResponse {
     key: string;
   };
 }
+
+type XeroScopes =
+  | "offline_access"
+  | "accounting.transactions"
+  | "accounting.settings"
+  | "accounting.contacts"
+  | "accounting.attachments"
+  | "payroll.employees"
+  | "payroll.payruns"
+  | "payroll.payslips"
+  | "payroll.settings"
+  | "payroll.timesheets"
+  | "files"
+  | "assets"
+  | "projects";
+
+
+type SageScopes = "full_access" | "full_access_with_payroll";
+
+export type OauthDestinations = "xero";
+export type OauthScopes<T> = T extends "xero"
+  ? XeroScopes
+  : T extends "sage"
+  ? SageScopes
+  : [];
+
+interface OauthDestinationProps<T extends OauthDestinations> {
+  scopes: [OauthScopes<T>, ...OauthScopes<T>[]];
+  type: T;
+  state?: string;
+  redirectUri: string;
+  clientId: string;
+}
+
+export interface CreateOauthDestinationProps {
+  code: string;
+  group?: string;
+  label?: string;
+  endpoint: string;
+  headers?: Record<string, any>;
+  type?: OauthDestinations;
+}
