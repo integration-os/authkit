@@ -14,7 +14,7 @@ class OauthDestination {
   }
 }
 
-export const useOauthDestination = <T extends OauthDestinations>(
+export const useOauth = <T extends OauthDestinations>(
   props: OauthDestinationProps<T>
 ) => {
   const { type, state, redirectUri, scopes, clientId } = props;
