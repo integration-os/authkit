@@ -78,6 +78,20 @@ export interface DestinationEventLinkProps {
   onClose?: () => void;
 }
 
+export interface EventLinkProps {
+  linkHeaders?: Record<string, unknown>;
+  linkTokenEndpoint: string;
+  environment?: "sandbox" | "production";
+  baseUrl?: string;
+  title?: string;
+  onClose?: () => void;
+  onSuccess?: (integration?: {
+    source?: LinkIntegrationResponse;
+    destination?: LinkIntegrationResponse;
+  }) => void;
+  onError?: (error: string) => void;
+}
+
 export interface WindowProps {
   group: string;
   linkTokenEndpoint: string;
@@ -88,6 +102,15 @@ export interface WindowProps {
   title?: string;
   onClose?: () => void;
   integrationTypes?: string[];
+}
+
+export interface EventLinkWindowProps {
+  linkTokenEndpoint: string;
+  linkHeaders?: Record<string, unknown>;
+  baseUrl?: string;
+  environment?: "sandbox" | "production";
+  title?: string;
+  onClose?: () => void;
 }
 
 export interface LinkIntegrationResponse {

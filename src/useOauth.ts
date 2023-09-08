@@ -30,7 +30,7 @@ export const useOauth = <T extends OauthDestinations>(
   )}&state=${state}`;
 
   const open = () => {
-    window.open(url, "_blank");
+    window.open(url, "connect", "width=500,height=800");
   };
   const create = async (props: CreateOauthDestinationProps) => {
     const {
