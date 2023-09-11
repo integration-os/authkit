@@ -9,8 +9,8 @@ export class EventLinkWindow {
   private title?: string;
 
   constructor(props: EventLinkWindowProps) {
-    this.linkTokenEndpoint = props.linkTokenEndpoint;
-    this.linkHeaders = props.linkHeaders;
+    this.linkTokenEndpoint = props.token.url;
+    this.linkHeaders = props.token.headers;
     this.baseUrl = props.baseUrl;
     this.environment = props.environment;
     this.onClose = props.onClose;

@@ -79,8 +79,8 @@ export interface DestinationEventLinkProps {
 }
 
 export interface EventLinkProps {
-  linkHeaders?: Record<string, unknown>;
-  linkTokenEndpoint: string;
+  // linkHeaders?: Record<string, unknown>;
+  // linkTokenEndpoint: string;
   environment?: "sandbox" | "production";
   baseUrl?: string;
   title?: string;
@@ -90,6 +90,10 @@ export interface EventLinkProps {
     destination?: LinkIntegrationResponse;
   }) => void;
   onError?: (error: string) => void;
+  token: {
+    url: string;
+    headers?: Record<string, unknown>;
+  }
 }
 
 export interface WindowProps {
@@ -105,12 +109,16 @@ export interface WindowProps {
 }
 
 export interface EventLinkWindowProps {
-  linkTokenEndpoint: string;
-  linkHeaders?: Record<string, unknown>;
+  // linkTokenEndpoint: string;
+  // linkHeaders?: Record<string, unknown>;
   baseUrl?: string;
   environment?: "sandbox" | "production";
   title?: string;
   onClose?: () => void;
+  token: {
+    url: string;
+    headers?: Record<string, unknown>;
+  }
 }
 
 export interface LinkIntegrationResponse {
