@@ -79,16 +79,11 @@ export interface DestinationEventLinkProps {
 }
 
 export interface EventLinkProps {
-  // linkHeaders?: Record<string, unknown>;
-  // linkTokenEndpoint: string;
   environment?: "sandbox" | "production";
   baseUrl?: string;
   title?: string;
   onClose?: () => void;
-  onSuccess?: (integration?: {
-    source?: LinkIntegrationResponse;
-    destination?: LinkIntegrationResponse;
-  }) => void;
+  onSuccess?: (connection: ConnectionRecord) => void;
   onError?: (error: string) => void;
   token: {
     url: string;
@@ -138,6 +133,48 @@ export interface LinkIntegrationResponse {
     key: string;
   };
 }
+
+export interface ConnectionRecord {
+  _id: string;
+  platformVersion: string;
+  connectionDefinitionId: string;
+  name: string;
+  key: string;
+  group: string;
+  environment: string;
+  platform: string;
+  secretsServiceId: string;
+  eventAccessId: string;
+  accessKey: string;
+  settings: {
+    parseWebhookBody: boolean;
+    showSecret: boolean;
+    allowCustomEvents: boolean;
+    oauth: boolean;
+  };
+  throughput: {
+    key: string;
+    limit: number;
+  };
+  ownership: {
+    buildableId: string;
+    clientId: string;
+    organizationId: string;
+    projectId: string;
+    userId: string;
+  };
+  createdAt: number;
+  updatedAt: number;
+  updated: boolean;
+  version: string;
+  lastModifiedBy: string;
+  deleted: boolean;
+  changeLog: Record<string, any>; // You can replace 'any' with a more specific type if needed
+  tags: string[];
+  active: boolean;
+  deprecated: boolean;
+}
+
 
 type XeroScopes =
   | "offline_access"

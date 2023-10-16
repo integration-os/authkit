@@ -27,42 +27,40 @@ export class EventLinkWindow {
     return "https://sandbox-link.event.dev";
   }
 
-  public initialize() {
+  public openLink() {
     const container = document.createElement("iframe");
     document.body.appendChild(container);
     container.style.height = "100%";
     container.style.width = "100%";
     container.style.position = "fixed";
-    container.style.display = "none";
+    container.style.display = "block";
     container.style.backgroundColor = "transparent";
     container.style.inset = "0px";
     container.style.borderWidth = "0px";
     container.id = `event-link`;
     container.src = this._getBaseUrl();
     container.style.overflow = "hidden auto";
-  }
 
-  public openLink() {
-    const iFrameWindow = document.getElementById(
-      `event-link`
-    ) as HTMLIFrameElement;
-    iFrameWindow.style.display = "block";
-
-    iFrameWindow?.contentWindow?.postMessage(
-      {
-        linkTokenEndpoint: this.linkTokenEndpoint,
-        linkHeaders: this.linkHeaders,
-        title: this.title,
-      },
-      this._getBaseUrl()
-    );
+    container.onload = () => {
+      // Now that the iframe is fully loaded, you can send the message
+      container.contentWindow?.postMessage(
+        {
+          linkTokenEndpoint: this.linkTokenEndpoint,
+          linkHeaders: this.linkHeaders,
+          title: this.title,
+        },
+        this._getBaseUrl()
+      );
+    };
   }
 
   public closeLink() {
     const iFrameWindow = document.getElementById(
       `event-link`
     ) as HTMLIFrameElement;
-    iFrameWindow.style.display = "none";
+    if (iFrameWindow) {
+      iFrameWindow.remove();
+    }
     this.onClose?.();
   }
 }
