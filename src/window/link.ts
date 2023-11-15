@@ -4,7 +4,6 @@ export class EventLinkWindow {
   private linkTokenEndpoint: string;
   private linkHeaders?: object;
   private baseUrl?: string;
-  private environment?: string;
   private onClose?: () => void;
   private title?: string;
 
@@ -12,7 +11,6 @@ export class EventLinkWindow {
     this.linkTokenEndpoint = props.token.url;
     this.linkHeaders = props.token.headers;
     this.baseUrl = props.baseUrl;
-    this.environment = props.environment;
     this.onClose = props.onClose;
     this.title = props.title;
   }
@@ -21,10 +19,7 @@ export class EventLinkWindow {
     if (this.baseUrl) {
       return this.baseUrl;
     }
-    if (this.environment === "production") {
-      return "https://link.event.dev";
-    }
-    return "https://sandbox-link.event.dev";
+    return "https://link.event.dev";
   }
 
   public openLink() {

@@ -79,7 +79,6 @@ export interface DestinationEventLinkProps {
 }
 
 export interface EventLinkProps {
-  environment?: "sandbox" | "production";
   baseUrl?: string;
   title?: string;
   onClose?: () => void;
