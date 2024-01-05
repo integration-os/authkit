@@ -18,7 +18,7 @@ yarn add @integrationos/embed-react
 
 ## Using the Embed component
 
-You'll want to replace the `token URL` with your token endpoint URL, which can be securely generated from your backend using IntegrationOS' [Embed Node](https://docs.integrationos.com/docs/embed-overview) library.
+You'll want to replace the `token URL` with your token endpoint URL, which can be securely generated from your backend using IntegrationOS' [Embed Node]([https://docs.integrationos.com/docs/embed-overview](https://www.npmjs.com/package/@integrationos/embed-node)) library.
 
 ```jsx
 import { useEmbed } from "@integrationos/embed-react";
