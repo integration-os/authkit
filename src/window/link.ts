@@ -4,65 +4,79 @@ export class EventLinkWindow {
   private linkTokenEndpoint: string;
   private linkHeaders?: object;
   private baseUrl?: string;
-  private environment?: string;
   private onClose?: () => void;
   private title?: string;
+  private selectedConnection?: string;
+  private showNameInput?: boolean;
 
   constructor(props: EventLinkWindowProps) {
-    this.linkTokenEndpoint = props.linkTokenEndpoint;
-    this.linkHeaders = props.linkHeaders;
+    this.linkTokenEndpoint = props.token.url;
+    this.linkHeaders = props.token.headers;
     this.baseUrl = props.baseUrl;
-    this.environment = props.environment;
     this.onClose = props.onClose;
     this.title = props.title;
+    this.selectedConnection = props.selectedConnection;
+    this.showNameInput = props.showNameInput;
   }
 
   private _getBaseUrl() {
     if (this.baseUrl) {
       return this.baseUrl;
     }
-    if (this.environment === "production") {
-      return "https://link.event.dev";
-    }
-    return "https://sandbox-link.event.dev";
+    return "https://embed.integrationos.com";
   }
 
-  public initialize() {
+  public openLink() {
     const container = document.createElement("iframe");
+
+    const jsonString = JSON.stringify({
+      linkTokenEndpoint: this.linkTokenEndpoint,
+      linkHeaders: this.linkHeaders,
+      title: this.title,
+      selectedConnection: this.selectedConnection,
+      showNameInput: this.showNameInput,
+    });
+
+    const base64Encoded = btoa(jsonString);
+    const urlParams = { data: base64Encoded };
+    const queryString = new URLSearchParams(urlParams).toString();
+
+    const url = `${this._getBaseUrl()}?${queryString}`;
+
     document.body.appendChild(container);
     container.style.height = "100%";
     container.style.width = "100%";
     container.style.position = "fixed";
-    container.style.display = "none";
+    container.style.display = "block";
     container.style.backgroundColor = "transparent";
     container.style.inset = "0px";
     container.style.borderWidth = "0px";
     container.id = `event-link`;
-    container.src = this._getBaseUrl();
+    container.src = url;
     container.style.overflow = "hidden auto";
-  }
 
-  public openLink() {
-    const iFrameWindow = document.getElementById(
-      `event-link`
-    ) as HTMLIFrameElement;
-    iFrameWindow.style.display = "block";
-
-    iFrameWindow?.contentWindow?.postMessage(
-      {
-        linkTokenEndpoint: this.linkTokenEndpoint,
-        linkHeaders: this.linkHeaders,
-        title: this.title,
-      },
-      this._getBaseUrl()
-    );
+    container.onload = () => {
+      // Now that the iframe is fully loaded, you can send the message
+      container.contentWindow?.postMessage(
+        {
+          linkTokenEndpoint: this.linkTokenEndpoint,
+          linkHeaders: this.linkHeaders,
+          title: this.title,
+          selectedConnection: this.selectedConnection,
+          showNameInput: this.showNameInput,
+        },
+        url
+      );
+    };
   }
 
   public closeLink() {
     const iFrameWindow = document.getElementById(
       `event-link`
     ) as HTMLIFrameElement;
-    iFrameWindow.style.display = "none";
+    if (iFrameWindow) {
+      iFrameWindow.remove();
+    }
     this.onClose?.();
   }
 }
