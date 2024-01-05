@@ -1,7 +1,7 @@
 {
   "name": "@integrationos/embed-react",
-  "version": "1.0.0",
-  "description": "A React hook wrapper for Event Embed.",
+  "version": "1.0.1",
+  "description": "React bindings for IntegrationOS Embed",
   "files": [
     "dist",
     "src"
@@ -49,7 +49,7 @@
     "tslib": "^2.0.3",
     "typescript": "^4.1.3"
   },
-  "author": "@event-inc",
+  "author": "@integrationos",
   "publishConfig": {
     "access": "public"
   },
@@ -59,14 +59,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/buildable/event-link.git"
+    "url": "git+https://github.com/integration-os/embed-react"
   },
   "keywords": [
     "event"
   ],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/buildable/event-link/issues"
-  },
-  "homepage": "https://github.com/buildable/event-link#readme"
+  "homepage": "https://integrationos.com"
 }
