@@ -1,6 +1,6 @@
 {
   "name": "@integrationos/embed-react",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "React bindings for IntegrationOS Embed",
   "files": [
     "dist",
@@ -62,7 +62,9 @@
     "url": "git+https://github.com/integration-os/embed-react"
   },
   "keywords": [
-    "event"
+    "integrationos",
+    "integrations",
+    "unified api"
   ],
   "license": "MIT",
   "homepage": "https://integrationos.com"

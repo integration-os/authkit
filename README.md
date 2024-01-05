@@ -1,7 +1,5 @@
 # embed-react
 
-# embed-react
-
 [React](https://react.dev/) hook and components for integrating with [IntegrationOS Embed](https://docs.integrationos.com/docs/embed-overview).
 
 ## Install
