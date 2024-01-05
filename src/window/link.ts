@@ -6,6 +6,8 @@ export class EventLinkWindow {
   private baseUrl?: string;
   private onClose?: () => void;
   private title?: string;
+  private selectedConnection?: string;
+  private showNameInput?: boolean;
 
   constructor(props: EventLinkWindowProps) {
     this.linkTokenEndpoint = props.token.url;
@@ -13,17 +15,34 @@ export class EventLinkWindow {
     this.baseUrl = props.baseUrl;
     this.onClose = props.onClose;
     this.title = props.title;
+    this.selectedConnection = props.selectedConnection;
+    this.showNameInput = props.showNameInput;
   }
 
   private _getBaseUrl() {
     if (this.baseUrl) {
       return this.baseUrl;
     }
-    return "https://link.event.dev";
+    return "https://embed.integrationos.com";
   }
 
   public openLink() {
     const container = document.createElement("iframe");
+
+    const jsonString = JSON.stringify({
+      linkTokenEndpoint: this.linkTokenEndpoint,
+      linkHeaders: this.linkHeaders,
+      title: this.title,
+      selectedConnection: this.selectedConnection,
+      showNameInput: this.showNameInput,
+    });
+
+    const base64Encoded = btoa(jsonString);
+    const urlParams = { data: base64Encoded };
+    const queryString = new URLSearchParams(urlParams).toString();
+
+    const url = `${this._getBaseUrl()}?${queryString}`;
+
     document.body.appendChild(container);
     container.style.height = "100%";
     container.style.width = "100%";
@@ -33,7 +52,7 @@ export class EventLinkWindow {
     container.style.inset = "0px";
     container.style.borderWidth = "0px";
     container.id = `event-link`;
-    container.src = this._getBaseUrl();
+    container.src = url;
     container.style.overflow = "hidden auto";
 
     container.onload = () => {
@@ -43,8 +62,10 @@ export class EventLinkWindow {
           linkTokenEndpoint: this.linkTokenEndpoint,
           linkHeaders: this.linkHeaders,
           title: this.title,
+          selectedConnection: this.selectedConnection,
+          showNameInput: this.showNameInput,
         },
-        this._getBaseUrl()
+        url
       );
     };
   }
