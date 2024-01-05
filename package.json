@@ -1,6 +1,6 @@
 {
-  "name": "@integrationos/embed",
-  "version": "1.0.8",
+  "name": "@integrationos/embed-react",
+  "version": "1.0.0",
   "description": "A React hook wrapper for Event Embed.",
   "files": [
     "dist",
