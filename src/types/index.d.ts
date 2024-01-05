@@ -84,6 +84,8 @@ export interface EventLinkProps {
   onClose?: () => void;
   onSuccess?: (connection: ConnectionRecord) => void;
   onError?: (error: string) => void;
+  selectedConnection?: string;
+  showNameInput?: boolean;
   token: {
     url: string;
     headers?: Record<string, unknown>;
@@ -109,6 +111,8 @@ export interface EventLinkWindowProps {
   environment?: "sandbox" | "production";
   title?: string;
   onClose?: () => void;
+  selectedConnection?: string;
+  showNameInput?: boolean;
   token: {
     url: string;
     headers?: Record<string, unknown>;
