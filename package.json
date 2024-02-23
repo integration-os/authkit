@@ -1,7 +1,7 @@
 {
-  "name": "@integrationos/embed-react",
-  "version": "1.0.5",
-  "description": "React bindings for IntegrationOS Embed",
+  "name": "@integrationos/authkit-react",
+  "version": "1.0.1",
+  "description": "React bindings for IntegrationOS AuthKit",
   "files": [
     "dist",
     "src"
@@ -59,7 +59,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/integration-os/embed-react"
+    "url": "git+https://github.com/integration-os/authkit-react"
   },
   "keywords": [
     "integrationos",

@@ -8,6 +8,7 @@ export class EventLinkWindow {
   private title?: string;
   private selectedConnection?: string;
   private showNameInput?: boolean;
+  private appTheme?: "dark" | "light";
 
   constructor(props: EventLinkWindowProps) {
     this.linkTokenEndpoint = props.token.url;
@@ -17,6 +18,7 @@ export class EventLinkWindow {
     this.title = props.title;
     this.selectedConnection = props.selectedConnection;
     this.showNameInput = props.showNameInput;
+    this.appTheme = props.appTheme;
   }
 
   private _getBaseUrl() {
@@ -35,6 +37,7 @@ export class EventLinkWindow {
       title: this.title,
       selectedConnection: this.selectedConnection,
       showNameInput: this.showNameInput,
+      appTheme: this.appTheme,
     });
 
     const base64Encoded = btoa(jsonString);
@@ -48,6 +51,7 @@ export class EventLinkWindow {
     container.style.width = "100%";
     container.style.position = "fixed";
     container.style.display = "block";
+    container.style.zIndex = "9999"
     container.style.backgroundColor = "transparent";
     container.style.inset = "0px";
     container.style.borderWidth = "0px";
@@ -64,6 +68,7 @@ export class EventLinkWindow {
           title: this.title,
           selectedConnection: this.selectedConnection,
           showNameInput: this.showNameInput,
+          appTheme: this.appTheme,
         },
         url
       );

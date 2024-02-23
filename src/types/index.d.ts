@@ -80,6 +80,7 @@ export interface DestinationEventLinkProps {
 
 export interface EventLinkProps {
   baseUrl?: string;
+  appTheme?: 'dark' | 'light';
   title?: string;
   onClose?: () => void;
   onSuccess?: (connection: ConnectionRecord) => void;
@@ -108,6 +109,7 @@ export interface EventLinkWindowProps {
   // linkTokenEndpoint: string;
   // linkHeaders?: Record<string, unknown>;
   baseUrl?: string;
+  appTheme?: 'dark' | 'light';
   environment?: "sandbox" | "production";
   title?: string;
   onClose?: () => void;
