@@ -26,7 +26,7 @@ import { useAuthKit } from "@integrationos/authkit-react";
 const { open } = useAuthKit({
   title: "Integrations",
   token: {
-    url: "https://api.your-company-name.com/embed-token",
+    url: "https://api.your-company-name.com/authkit-token",
     headers: {},
   },
   onSuccess: (connections) => {},
