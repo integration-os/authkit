@@ -24,7 +24,6 @@ You'll want to replace the `token URL` with your token endpoint URL, which can
 import { useAuthKit } from "@integrationos/authkit-react";
 
 const { open } = useAuthKit({
-  title: "Integrations",
   token: {
     url: "https://api.your-company-name.com/authkit-token",
     headers: {},
