@@ -25,7 +25,7 @@ export class EventLinkWindow {
     if (this.baseUrl) {
       return this.baseUrl;
     }
-    return "https://authit.integrationos.com";
+    return "https://authkit.integrationos.com";
   }
 
   public openLink() {
