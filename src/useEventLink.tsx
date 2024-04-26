@@ -5,23 +5,29 @@ export const useEventLink = (props: EventLinkProps) => {
   const linkWindow = createWindow({ ...props });
 
   const handleMessage = (event: EventProps) => {
-    const iFrameWindow = document.getElementById(`event-link`) as HTMLIFrameElement;
-    if (iFrameWindow?.style?.display === "block") {
-      switch (event.data?.messageType) {
-        case "EXIT_EVENT_LINK":
-          linkWindow.closeLink();
-          break;
-        case "LINK_SUCCESS":
-          props.onSuccess?.(event.data?.message as ConnectionRecord);
-          break;
-        case "LINK_ERROR":
-          props.onError?.(event.data?.message as string);
-          break;
+    if (typeof window !== "undefined") {
+      const iFrameWindow = document.getElementById(
+        `event-link`
+      ) as HTMLIFrameElement;
+      if (iFrameWindow?.style?.display === "block") {
+        switch (event.data?.messageType) {
+          case "EXIT_EVENT_LINK":
+            linkWindow.closeLink();
+            break;
+          case "LINK_SUCCESS":
+            props.onSuccess?.(event.data?.message as ConnectionRecord);
+            break;
+          case "LINK_ERROR":
+            props.onError?.(event.data?.message as string);
+            break;
+        }
       }
     }
   };
 
-  window.addEventListener("message", handleMessage);
+  if (typeof window !== "undefined") {
+    window.addEventListener("message", handleMessage);
+  }
 
   const open = () => {
     linkWindow.openLink();
