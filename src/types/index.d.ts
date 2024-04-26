@@ -148,7 +148,6 @@ export interface ConnectionRecord {
   environment: string;
   platform: string;
   secretsServiceId: string;
-  accessKey: string;
   settings: {
     parseWebhookBody: boolean;
     showSecret: boolean;
