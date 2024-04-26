@@ -1,7 +1,7 @@
 {
-  "name": "@integrationos/authkit-react",
-  "version": "1.0.5",
-  "description": "React bindings for IntegrationOS AuthKit",
+  "name": "@integrationos/authkit",
+  "version": "1.0.0",
+  "description": "Frontend bindings for IntegrationOS AuthKit",
   "files": [
     "dist",
     "src"
@@ -16,14 +16,11 @@
     "@babel/plugin-proposal-export-default-from": "^7.12.1",
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.12.10",
-    "@babel/preset-react": "^7.12.10",
     "@rollup/plugin-babel": "^5.2.2",
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^11.0.1",
     "@rollup/plugin-typescript": "^8.1.0",
     "@tsconfig/recommended": "^1.0.1",
-    "@types/react": "^18.0.31",
-    "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^4.10.0",
     "@typescript-eslint/parser": "^4.10.0",
     "@wessberg/rollup-plugin-ts": "^1.3.8",
@@ -32,13 +29,10 @@
     "babel-plugin-add-module-exports": "^1.0.4",
     "babel-plugin-typescript-to-proptypes": "^1.4.2",
     "eslint": "^7.15.0",
-    "eslint-plugin-react": "^7.21.5",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "npm": "^9.6.2",
     "npmrc": "^1.1.1",
     "prettier": "^2.2.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "rollup": "^2.79.1",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-copy": "^3.4.0",
@@ -59,7 +53,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/integration-os/authkit-react"
+    "url": "git+https://github.com/integration-os/authkit"
   },
   "keywords": [
     "integrationos",
