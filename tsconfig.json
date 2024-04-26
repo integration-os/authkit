@@ -4,7 +4,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "noEmit": true,
     "declaration": true,
     "allowJs": true,

@@ -6,12 +6,11 @@ import copy from 'rollup-plugin-copy';
 import pkg from './package.json';
 import { terser } from 'rollup-plugin-terser';
 import json from '@rollup/plugin-json';
-// import nodePolyfills from 'rollup-plugin-polyfill-node';
 
 
 export default {
   input: 'src/index.ts',
-  external: ['react', 'prop-types'],
+  external: [],
   output: [
     { file: pkg.main, format: 'cjs' },
     { file: pkg.module, format: 'es' },
@@ -36,12 +35,7 @@ export default {
       babelHelpers: 'bundled',
       extensions: ['.ts', '.js', '.tsx', '.jsx'],
     }),
-    commonjs({
-      namedExports: {
-        'react/jsx-runtime': ['jsx', 'jsxs', 'Fragment'],
-        "react-dom": ["createPortal"],
-      }
-    }),
+    commonjs(),
     terser(),
   ],
 };

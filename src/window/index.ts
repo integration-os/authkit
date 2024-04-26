@@ -1,81 +1,91 @@
-import { WindowProps } from "../types";
+import { EventLinkWindowProps } from "../types";
 
-export class LinkWindow {
-  private group: string;
-  private integrationTypes?: string[];
+export class EventLinkWindow {
   private linkTokenEndpoint: string;
   private linkHeaders?: object;
   private baseUrl?: string;
-  private environment?: string;
-  private connectionType: string;
   private onClose?: () => void;
   private title?: string;
+  private selectedConnection?: string;
+  private showNameInput?: boolean;
+  private appTheme?: "dark" | "light";
 
-  constructor(props: WindowProps) {
-    this.group = props.group;
-    this.integrationTypes = props.integrationTypes;
-    this.linkTokenEndpoint = props.linkTokenEndpoint;
-    this.linkHeaders = props.linkHeaders;
+  constructor(props: EventLinkWindowProps) {
+    this.linkTokenEndpoint = props.token.url;
+    this.linkHeaders = props.token.headers;
     this.baseUrl = props.baseUrl;
-    this.environment = props.environment;
-    this.connectionType = props.connectionType;
     this.onClose = props.onClose;
     this.title = props.title;
+    this.selectedConnection = props.selectedConnection;
+    this.showNameInput = props.showNameInput;
+    this.appTheme = props.appTheme;
   }
 
   private _getBaseUrl() {
     if (this.baseUrl) {
       return this.baseUrl;
     }
-    if (this.environment === "production") {
-      return "https://link.event.dev";
-    }
-    return "https://sandbox-link.event.dev";
+    return "https://authkit.integrationos.com";
   }
 
-  public initialize() {
+  public openLink() {
     const container = document.createElement("iframe");
+
+    const jsonString = JSON.stringify({
+      linkTokenEndpoint: this.linkTokenEndpoint,
+      linkHeaders: this.linkHeaders,
+      title: this.title,
+      selectedConnection: this.selectedConnection,
+      showNameInput: this.showNameInput,
+      appTheme: this.appTheme,
+    });
+
+    const base64Encoded = btoa(jsonString);
+    const urlParams = { data: base64Encoded };
+    const queryString = new URLSearchParams(urlParams).toString();
+
+    const url = `${this._getBaseUrl()}?${queryString}`;
+
     document.body.appendChild(container);
     container.style.height = "100%";
     container.style.width = "100%";
     container.style.position = "fixed";
-    container.style.display = "none";
+    container.style.display = "block";
+    container.style.zIndex = "9999"
     container.style.backgroundColor = "transparent";
     container.style.inset = "0px";
     container.style.borderWidth = "0px";
-    container.id = `${this.connectionType}-event-link-iframe`;
-    container.src = this._getBaseUrl();
+    container.id = `event-link`;
+    container.src = url;
     container.style.overflow = "hidden auto";
-  }
 
-  public openLink() {
-    const iFrameWindow = document.getElementById(
-      `${this.connectionType}-event-link-iframe`
-    ) as HTMLIFrameElement;
-    iFrameWindow.style.display = "block";
-
-    iFrameWindow?.contentWindow?.postMessage(
-      {
-        group: this.group,
-        integrationTypes: this.integrationTypes,
-        linkTokenEndpoint: this.linkTokenEndpoint,
-        linkHeaders: this.linkHeaders,
-        connectionType: this.connectionType,
-        title: this.title,
-      },
-      this._getBaseUrl()
-    );
+    container.onload = () => {
+      // Now that the iframe is fully loaded, you can send the message
+      container.contentWindow?.postMessage(
+        {
+          linkTokenEndpoint: this.linkTokenEndpoint,
+          linkHeaders: this.linkHeaders,
+          title: this.title,
+          selectedConnection: this.selectedConnection,
+          showNameInput: this.showNameInput,
+          appTheme: this.appTheme,
+        },
+        url
+      );
+    };
   }
 
   public closeLink() {
     const iFrameWindow = document.getElementById(
-      `${this.connectionType}-event-link-iframe`
+      `event-link`
     ) as HTMLIFrameElement;
-    iFrameWindow.style.display = "none";
+    if (iFrameWindow) {
+      iFrameWindow.remove();
+    }
     this.onClose?.();
   }
 }
 
-export const createWindow = (props: WindowProps) => {
-  return new LinkWindow(props);
+export const createWindow = (props: EventLinkWindowProps) => {
+  return new EventLinkWindow(props);
 };

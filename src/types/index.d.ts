@@ -145,11 +145,9 @@ export interface ConnectionRecord {
   connectionDefinitionId: string;
   name: string;
   key: string;
-  group: string;
   environment: string;
   platform: string;
   secretsServiceId: string;
-  eventAccessId: string;
   accessKey: string;
   settings: {
     parseWebhookBody: boolean;
@@ -161,20 +159,12 @@ export interface ConnectionRecord {
     key: string;
     limit: number;
   };
-  ownership: {
-    buildableId: string;
-    clientId: string;
-    organizationId: string;
-    projectId: string;
-    userId: string;
-  };
   createdAt: number;
   updatedAt: number;
   updated: boolean;
   version: string;
   lastModifiedBy: string;
   deleted: boolean;
-  changeLog: Record<string, any>; // You can replace 'any' with a more specific type if needed
   tags: string[];
   active: boolean;
   deprecated: boolean;
@@ -214,11 +204,9 @@ interface OauthDestinationProps<T extends OauthDestinations> {
   clientId: string;
 }
 
-export interface CreateOauthDestinationProps {
-  code: string;
-  group?: string;
-  label?: string;
-  endpoint: string;
-  headers?: Record<string, any>;
-  type?: OauthDestinations;
+export interface EventProps {
+  data: {
+    messageType: string;
+    message: ConnectionRecord | string;
+  }
 }
