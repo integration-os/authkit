@@ -1,6 +1,6 @@
 {
   "name": "@picahq/authkit",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Frontend bindings for Pica AuthKit",
   "files": [
     "dist",
